@@ -1,0 +1,33 @@
+[project]
+name = "rag-retrieval-mcp"
+version = "0.1.0"
+description = "A generic RAG MCP server with pluggable embedding providers and vector stores"
+license = "Apache-2.0"
+authors = [{name = "MaryamZi"}]
+readme = "README.md"
+keywords = ["mcp", "rag", "retrieval", "embeddings", "vector-search"]
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]>=1.0.0",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.0.0"]
+pinecone = ["pinecone>=5.0.0"]
+all = ["rag-retrieval-mcp[openai,pinecone]"]
+
+[dependency-groups]
+dev = ["pytest>=8.0.0", "pytest-asyncio>=0.24.0"]
+
+[project.scripts]
+rag-retrieval-mcp = "rag_retrieval_mcp.server:main"
+
+[project.urls]
+Repository = "https://github.com/MaryamZi/rag-retrieval-mcp"
+
+[build-system]
+requires = ["uv_build>=0.9.28,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "rag_retrieval_mcp"
