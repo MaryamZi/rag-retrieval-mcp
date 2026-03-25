@@ -13,6 +13,7 @@ Vendor MCP servers usually only support their (own) integrated embedding models.
 
 **Vector Stores:**
 - Pinecone
+- pgvector (PostgreSQL)
 
 ## Tools
 
@@ -70,6 +71,11 @@ rag-retrieval-mcp
 | `PINECONE_API_KEY` | Yes (if using Pinecone) | | Pinecone API key |
 | `PINECONE_HOST` | Yes (if using Pinecone) | | Pinecone index host URL |
 | `PINECONE_TEXT_FIELD` | No | `text` | Metadata field containing text |
+| `PGVECTOR_CONNECTION_STRING` | Yes (if using pgvector) | | PostgreSQL connection string |
+| `PGVECTOR_TABLE` | No | `embeddings` | Table name containing vectors |
+| `PGVECTOR_TEXT_COLUMN` | No | `text` | Column containing text content |
+| `PGVECTOR_EMBEDDING_COLUMN` | No | `embedding` | Column containing embedding vectors |
+
 
 ## Adding New Providers
 

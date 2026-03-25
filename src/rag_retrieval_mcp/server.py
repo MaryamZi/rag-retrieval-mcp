@@ -54,8 +54,21 @@ def _get_vector_store() -> VectorStore:
         from rag_retrieval_mcp.vector_stores.pinecone import PineconeVectorStore
 
         return PineconeVectorStore(api_key=api_key, host=host, text_field=text_field)
+    if store == "pgvector":
+        connection_string = _require_env("PGVECTOR_CONNECTION_STRING")
+        table = os.environ.get("PGVECTOR_TABLE", "embeddings")
+        text_column = os.environ.get("PGVECTOR_TEXT_COLUMN", "text")
+        embedding_column = os.environ.get("PGVECTOR_EMBEDDING_COLUMN", "embedding")
+        from rag_retrieval_mcp.vector_stores.pgvector import PgVectorStore
+
+        return PgVectorStore(
+            connection_string=connection_string,
+            table=table,
+            text_column=text_column,
+            embedding_column=embedding_column,
+        )
     raise ValueError(
-        f"Unknown vector store: {store!r}. Supported: 'pinecone'"
+        f"Unknown vector store: {store!r}. Supported: 'pinecone', 'pgvector'"
     )
 
 

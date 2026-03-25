@@ -141,6 +141,14 @@ class TestConfig:
             with pytest.raises(RuntimeError, match="PINECONE_API_KEY"):
                 _get_vector_store()
 
+    def test_missing_pgvector_connection_string_raises(self):
+        from rag_retrieval_mcp.server import _get_vector_store
+
+        env = {"RAG_VECTOR_STORE": "pgvector"}
+        with patch.dict(os.environ, env, clear=True):
+            with pytest.raises(RuntimeError, match="PGVECTOR_CONNECTION_STRING"):
+                _get_vector_store()
+
 
 class TestEmbeddingProviderBatch:
     @pytest.mark.asyncio
